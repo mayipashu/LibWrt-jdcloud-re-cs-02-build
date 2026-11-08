@@ -182,9 +182,11 @@ jobs:
         run: |
           cd libwrt/bin/targets/qualcommax/ipq60xx
           TAG="mesh-$(TZ=Asia/Shanghai date +%Y%m%d-%H%M%S)"
+          NOTES=$(printf '%s\n' \
+            "LibWrt 25.12-nss (kernel 6.12, NSS) for JDCloud RE-CS-02 (AX6600)." \
+            "内置: luci-app-mesh (802.11s + batman-adv + dawn) / homeproxy + sing-box / lucky / easytier / tinc / frpc / n2n / USB3+samba4 / watchcat。" \
+            "默认地址 192.168.1.1，密码为空。")
           gh release create "$TAG" --repo "$GITHUB_REPOSITORY" \
             --title "LibWrt JDCloud RE-CS-02 ($TAG)" \
-            --notes "LibWrt 25.12-nss (kernel 6.12, NSS) for JDCloud RE-CS-02 (AX6600).
-内置: luci-app-mesh (802.11s + batman-adv + dawn) / homeproxy + sing-box / lucky / easytier / tinc / frpc / n2n / USB3+samba4 / watchcat。
-默认地址 192.168.1.1，密码为空。" \
+            --notes "$NOTES" \
             *.bin
